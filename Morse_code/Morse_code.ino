@@ -1,21 +1,20 @@
 #include <Stepper.h>
-  int m393Signal = 0; //initilizing pins for motor controller and stepper motor
+  int m393Signal = 3; //initilizing pins for motor controller and stepper motor
   int stepperPin1 = 9;
   int stepperPin2 = 8;
   int stepperPin3 = 11;
   int stepperPin4 = 10;
    
   int rpmStepper = 100; //defining rpm values for each motor
-  int rpm393 = 100;
+  int rpm393 = 160;
   
   int stepCount = 100; //amount of steps in stepper motor
-  int wheelCirc = 10*3.14; //circumfrence of the wheel in stepper motor
+  int wheelCirc = 7*3.14; //circumfrence of the wheel in stepper motor
   Stepper stepMot = Stepper(stepCount,stepperPin1,stepperPin2,stepperPin3,stepperPin4);  
 
   String message = "hello";
 void setup() {
   // put your setup code here, to run once:
-  pinMode(m393Signal, OUTPUT);
   pinMode(stepperPin1, OUTPUT);
   pinMode(stepperPin2, OUTPUT);
   pinMode(stepperPin3, OUTPUT);
@@ -26,7 +25,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
+  liftPen();
+  delay(10000);
+  dropPen();
+  delay(10000);
+  /*for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
     int letterNum = (int)toLowerCase(message[index]); //converts to int (the switch needs integers)
     switch (letterNum){  //calls on the proper function to draw the appropriate charecter
       case 97  : a(); break;
@@ -65,18 +68,18 @@ void loop() {
         space(3);
       }
     } 
-    }
+    }*/
   }
 
 
 void liftPen(){
   analogWrite (m393Signal,223); // set 393 motor to half speed forward (1.75 ms period) for the duration of 1 round
-  delay( ( 2 / (rpm393/60) ) *1000);
+  delay( ( (rpm393/60)/2.0 ) *1000);
   analogWrite (m393Signal,0);
 }
 void dropPen(){
   analogWrite (m393Signal,160); // set 393 motor to half speed backwards (1.25 ms period) for the duration of 1 round
-  delay( ( 2 / (rpm393/60) ) *1000);
+  delay( ( (rpm393/60)/2.0 ) *1000);
   analogWrite (m393Signal,0);
 }
 void space(int len){
