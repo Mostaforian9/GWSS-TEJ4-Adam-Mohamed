@@ -6,7 +6,7 @@
   int stepperPin4 = 10;
    
   int rpmStepper = 100; //defining rpm values for each motor
-  int rpm393 = 160;
+  int rpm393 = 240;
   
   int stepCount = 100; //amount of steps in stepper motor
   int wheelCirc = 7*3.14; //circumfrence of the wheel in stepper motor
@@ -15,6 +15,7 @@
   String message = "hello";
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
   pinMode(stepperPin1, OUTPUT);
   pinMode(stepperPin2, OUTPUT);
   pinMode(stepperPin3, OUTPUT);
@@ -25,10 +26,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  liftPen();
-  delay(10000);
-  dropPen();
-  delay(10000);
+  for(int i = 0; i<256;i++){
+    analogWrite (m393Signal,i);
+    Serial.println(i);
+    delay(300);
+  }
+
   /*for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
     int letterNum = (int)toLowerCase(message[index]); //converts to int (the switch needs integers)
     switch (letterNum){  //calls on the proper function to draw the appropriate charecter
@@ -73,14 +76,18 @@ void loop() {
 
 
 void liftPen(){
-  analogWrite (m393Signal,223); // set 393 motor to half speed forward (1.75 ms period) for the duration of 1 round
-  delay( ( (rpm393/60)/2.0 ) *1000);
-  analogWrite (m393Signal,0);
+  analogWrite (m393Signal,206); // set 393 motor to quarter speed forward (1.75 ms period) for the duration of 1 round
+  Serial.println("FWD start");
+  delay( ( 4/(rpm393/60.0) ) *1000);
+  analogWrite (m393Signal,191);
+  Serial.println("FWD end");
 }
 void dropPen(){
-  analogWrite (m393Signal,160); // set 393 motor to half speed backwards (1.25 ms period) for the duration of 1 round
-  delay( ( (rpm393/60)/2.0 ) *1000);
-  analogWrite (m393Signal,0);
+  analogWrite (m393Signal,175); // set 393 motor to quarter speed backwards (1.25 ms period) for the duration of 1 round
+  Serial.println("BWD start");
+  delay( ( 4/(rpm393/60.0) ) *1000);
+  analogWrite (m393Signal,191);
+  Serial.println("BWD end");
 }
 void space(int len){
   stepMot.step( (1*len/wheelCirc) * stepCount); //turns the wheel to pull the paper by "len" amounts op spaces, each space is 1 centimeter
