@@ -1,14 +1,14 @@
 #include <Stepper.h>
   int m393Signal = 3; //initilizing pins for motor controller and stepper motor
-  int stepperPin1 = 9;
-  int stepperPin2 = 8;
-  int stepperPin3 = 11;
-  int stepperPin4 = 10;
+  int stepperPin1 = 8;
+  int stepperPin2 = 9;
+  int stepperPin3 = 10;
+  int stepperPin4 = 11;
    
   int rpmStepper = 100; //defining rpm values for each motor
   int rpm393 = 240;
   
-  int stepCount = 100; //amount of steps in stepper motor
+  int stepCount = 64; //amount of steps in stepper motor
   int wheelCirc = 7*3.14; //circumfrence of the wheel in stepper motor
   Stepper stepMot = Stepper(stepCount,stepperPin1,stepperPin2,stepperPin3,stepperPin4);  
 
@@ -26,12 +26,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for(int i = 0; i<256;i++){
-    analogWrite (m393Signal,i);
-    Serial.println(i);
-    delay(300);
-  }
-
+  space(2);
   /*for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
     int letterNum = (int)toLowerCase(message[index]); //converts to int (the switch needs integers)
     switch (letterNum){  //calls on the proper function to draw the appropriate charecter
