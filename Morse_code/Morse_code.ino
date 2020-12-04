@@ -1,14 +1,14 @@
 #include <Stepper.h>
   int m393Signal = 3; //initilizing pins for motor controller and stepper motor
-  int stepperPin1 = 8;
-  int stepperPin2 = 9;
-  int stepperPin3 = 10;
-  int stepperPin4 = 11;
+  int stepperPin1 = 9;
+  int stepperPin2 = 8;
+  int stepperPin3 = 11;
+  int stepperPin4 = 10;
    
   int rpmStepper = 100; //defining rpm values for each motor
-  int rpm393 = 240;
+  int rpm393 = 180;
   
-  int stepCount = 64; //amount of steps in stepper motor
+  int stepCount = 100; //amount of steps in stepper motor
   int wheelCirc = 7*3.14; //circumfrence of the wheel in stepper motor
   Stepper stepMot = Stepper(stepCount,stepperPin1,stepperPin2,stepperPin3,stepperPin4);  
 
@@ -26,7 +26,15 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  space(2);
+  /*for(int i = 0; i<256;i++){
+    analogWrite (m393Signal,i);
+    Serial.println(i);
+    delay(300);
+  }*/
+  liftPen();
+  delay(1000);
+  dropPen();
+  delay(1000);
   /*for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
     int letterNum = (int)toLowerCase(message[index]); //converts to int (the switch needs integers)
     switch (letterNum){  //calls on the proper function to draw the appropriate charecter
@@ -71,14 +79,14 @@ void loop() {
 
 
 void liftPen(){
-  analogWrite (m393Signal,206); // set 393 motor to quarter speed forward (1.75 ms period) for the duration of 1 round
+  analogWrite (m393Signal,199); // set 393 motor to one eigth speed forward (1.625 ms period) for the duration of 1 round
   Serial.println("FWD start");
   delay( ( 4/(rpm393/60.0) ) *1000);
   analogWrite (m393Signal,191);
   Serial.println("FWD end");
 }
 void dropPen(){
-  analogWrite (m393Signal,175); // set 393 motor to quarter speed backwards (1.25 ms period) for the duration of 1 round
+  analogWrite (m393Signal,177); // set 393 motor to one eitgth speed backwards (1.125 ms period) for the duration of 1 round
   Serial.println("BWD start");
   delay( ( 4/(rpm393/60.0) ) *1000);
   analogWrite (m393Signal,191);
