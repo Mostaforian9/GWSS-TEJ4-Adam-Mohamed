@@ -13,6 +13,8 @@
   Stepper stepMot = Stepper(stepCount,stepperPin1,stepperPin2,stepperPin3,stepperPin4);  
 
   String message = "hello";
+  String oldMessage = ",.";
+  bool newMessage = false;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -26,8 +28,17 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  space(2);
-  /*for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
+  Serial.println("what would you like to write (letters only please)");
+  while (newMessage == false){
+    if (Serial.available()>0){
+      message = Serial.read();
+    }
+    if (message != oldMessage){
+    newMessage = true;
+    message = oldMessage;
+  }
+  }
+  for (int index = 0; index < message.length() ; index++){ //reads each charecter in the message
     int letterNum = (int)toLowerCase(message[index]); //converts to int (the switch needs integers)
     switch (letterNum){  //calls on the proper function to draw the appropriate charecter
       case 97  : a(); break;
@@ -66,7 +77,7 @@ void loop() {
         space(3);
       }
     } 
-    }*/
+    }
   }
 
 
