@@ -12,7 +12,7 @@
   int wheelCirc = 7*3.14; //circumfrence of the wheel in stepper motor
   Stepper stepMot = Stepper(stepCount,stepperPin1,stepperPin2,stepperPin3,stepperPin4);  
 
-  String message = "hello";
+  String message = ",.";
   String oldMessage = ",.";
   bool newMessage = false;
 void setup() {
