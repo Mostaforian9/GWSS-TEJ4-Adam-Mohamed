@@ -25,8 +25,8 @@ ballWidth = 20
 position = positions.posCalc(winHeight,winWidth,ballHeight,ballWidth,playerHeight,playerWidth)
 
 #creating the graphics for paddles and ball
-p1 = shapes.Rectangle(0, ardRead.readPositions()[0], playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
-p2 = shapes.Rectangle(winWidth-playerWidth, ardRead.readPositions()[1], playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
+p1 = shapes.Rectangle(0, 100, playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
+p2 = shapes.Rectangle(winWidth-playerWidth, 100, playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
 p1Points = 0
 p2Points = 0
 ball = shapes.Rectangle(100,500, ballWidth, ballHeight, color=(255,255,255), batch=gameElements)
