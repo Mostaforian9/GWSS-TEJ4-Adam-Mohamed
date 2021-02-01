@@ -27,9 +27,10 @@ position = positions.posCalc(winHeight,winWidth,ballHeight,ballWidth,playerHeigh
 #creating the graphics for paddles and ball
 p1 = shapes.Rectangle(0, 100, playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
 p2 = shapes.Rectangle(winWidth-playerWidth, 100, playerWidth, playerHeight, color=(255,255,255), batch=gameElements)
+ball = shapes.Rectangle(100,500, ballWidth, ballHeight, color=(255,255,255), batch=gameElements)
 p1Points = 0
 p2Points = 0
-ball = shapes.Rectangle(100,500, ballWidth, ballHeight, color=(255,255,255), batch=gameElements)
+
 
 #creating graphics for the score
 
